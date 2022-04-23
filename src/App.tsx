@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useCallback } from "react";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { Registration } from "./components/registration";
+import { Main } from "./components/main";
+import { Login } from "./components/login";
+import { RegisterVerify } from "./components/registration/registerVerify";
+import { useSelector } from "react-redux";
+export const App = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
 
-function App() {
+  const { refresh, access } = useSelector(
+    ({ mainReducer }: any) => mainReducer
+  );
+
+  const checkAccessPage = useCallback(() => {
+    if (refresh || access) {
+    } else if (
+      location.pathname !== "/login" &&
+      location.pathname !== "/registration"
+    ) {
+      navigate(`/login`);
+    }
+  }, [refresh, access, location, navigate]);
+
+  useEffect(() => {
+    checkAccessPage();
+  }, [checkAccessPage]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register-verify" element={<RegisterVerify />} />
+      </Routes>
     </div>
   );
-}
-
-export default App;
+};
