@@ -53,6 +53,5 @@
     ]
   },
   "devDependencies": {
-    "github-pages": "^3.0.2"
   }
 }

@@ -22,7 +22,7 @@ export const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  console.log(error);
+
   let navigate = useNavigate();
   const dispatch = useDispatch();
 

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { App } from "./App";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter  as Router } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import { GlobalStyle, theme } from "./globalStyle";
 import { Provider } from "react-redux";
